@@ -51,6 +51,16 @@ io.on("connection", (socket) => {
     }
   });
 
+
+  socket.on("writing", (data) => {
+    console.log(data);
+    socket.to(data.room).emit("show_writing", data);
+  });
+
+  socket.on("writing_status", (data) => {
+    socket.to(data.room).emit("show_status", data.status);
+  });
+
   socket.on('disconnect', () => {
     for (const room in rooms) {
       const index = rooms[room].indexOf(socket.username);
