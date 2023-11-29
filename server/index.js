@@ -20,7 +20,7 @@ io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
 
     socket.on("send_message", (data) => {
-      socket.to(data.room).emit("receive_message", data)
+      io.to(data.room).emit("receive_message", data)
   })
 
   socket.on('join_room', (data) => {
