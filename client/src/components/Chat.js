@@ -126,9 +126,9 @@ const Chat = ({room, username, socket}) => {
       <button onClick={sendMessage}> Send Message </button>
       <h1>Message</h1>
       {listOfMessages.map((message, index) => (
-    <div key={index}>
-      <p>{message.username}: {message.message}</p>
-    </div>
+    <div key={index} className={message.username === username ? 'sent-message' : 'received-message'}>
+    <p>{message.username}: {message.message}</p>
+  </div>
   ))}
       <div className="writing">
           {isWriting ? <p>{dataWriting} is writing..</p> : ""}
