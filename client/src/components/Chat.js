@@ -19,13 +19,13 @@ const Chat = ({room, username, socket}) => {
   const [messageReceived, setMessageReceived] = useState("");
   const [listOfMessages, setListOfMessages] = useState([]);
 
-  const [credentials, setCredentials] = useState({room: '', username: ''});
+  // const [credentials, setCredentials] = useState({room: '', username: ''});
 
   const sendMessage = () => {
-    const messages = {
+    const messageTemp = {
       message, room, username
     };
-    setListOfMessages((prev) => [...prev, messages]);
+    setListOfMessages((prev) => [...prev, messageTemp]);
     socket.emit("send_message", { message, room, username });
     setMessage("");
   }; 
@@ -36,9 +36,9 @@ const Chat = ({room, username, socket}) => {
   };
 
 
-  const fetchExistingRooms = () => {
-    socket.emit('get_rooms');
-  };
+  // const fetchExistingRooms = () => {
+  //   socket.emit('get_rooms');
+  // };
 
   const leaveRoom = () => {
     socket.emit("leave_room", { room, username });
@@ -48,8 +48,11 @@ const Chat = ({room, username, socket}) => {
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      setMessageReceived(data.username + ": " + data.message);
+      if (data.username !== username) {
+        setListOfMessages((prevMessages) => [...prevMessages, data]);
+      }
     });
+    
 
     socket.on('existing_rooms', (rooms) => {
       setExistingRooms(rooms);
@@ -122,8 +125,11 @@ const Chat = ({room, username, socket}) => {
       />
       <button onClick={sendMessage}> Send Message </button>
       <h1>Message</h1>
-      <p>{messageReceived}</p>
-
+      {listOfMessages.map((message, index) => (
+    <div key={index}>
+      <p>{message.username}: {message.message}</p>
+    </div>
+  ))}
       <div className="writing">
           {isWriting ? <p>{dataWriting} is writing..</p> : ""}
         </div>

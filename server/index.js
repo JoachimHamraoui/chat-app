@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
     rooms[data.room].push(data.username);
 
     io.to(data.room).emit('users_in_room', rooms[data.room]);
-    io.emit('existing_rooms', Object.keys(rooms));
+    // io.emit('existing_rooms', Object.keys(rooms));
   });
 
   socket.on('leave_room', (data) => {

@@ -34,6 +34,10 @@ function App() {
     setUsername(event.target.value);
   };
 
+  useEffect(() => {
+    setRoom(1)
+  }, []);
+
   return (
 
     <div className="App">
@@ -44,18 +48,20 @@ function App() {
           ref={ref1}
           onChange={handleUsernameChange}
         />
-        <input
+        {/* <input
           placeholder="Room..."
           ref={ref2}
           onChange={(event) => {
             setRoom(event.target.value);
           }}
-        />
+          hidden
+        /> */}
         <button onClick={joinRoom}> Join this Room </button>
       </div>
       )}
 
       {showChat && <Chat room={room} username={username} socket={socket} />}
+      {/* {showChat && <button onClick={leaveRoom}> Leave Room </button>} */}
     </div>
   )
 }
