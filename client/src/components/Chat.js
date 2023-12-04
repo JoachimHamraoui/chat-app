@@ -89,30 +89,15 @@ const Chat = ({room, username, socket}) => {
   }, []);
 
   return (
-    <div className="App">
-      {/* <div>
-        <input
-          placeholder="Username..."
-          ref={ref1}
-          onChange={() => {
-            setCredentials((prev) => ({
-              ...prev,
-              username: ref1.current.value,
-            }));
-          }}
-        />
-        <input
-          placeholder="Room..."
-          ref={ref2}
-          onChange={() => {
-            setCredentials((prev) => ({
-              ...prev,
-              room: ref2.current.value,
-            }));
-          }}
-        />
-        <button onClick={joinRoom}> Join this Room </button>
-      </div> */}
+    <div className="w-full h-screen flex items-center m-auto">
+      <div className="w-3/12 h-screen bg-grey flex flex-col">
+
+      </div>
+      <div className="w-9/12 h-screen fkex flex-col">
+        <div className=" w-full px-6 py-4 border-grey border-b-2">
+          <h2 className="text-green font-display text-xl">Welcome to the "{room}" chatroom</h2>
+        </div>
+      </div>
       <input
         placeholder="Message..."
         onChange={(event) => {
@@ -123,29 +108,29 @@ const Chat = ({room, username, socket}) => {
               socket.emit("writing_status", { room, status: false });
             }}
       />
-      <button onClick={sendMessage}> Send Message </button>
+      <button className="text-white" onClick={sendMessage}> Send Message </button>
       <h1>Message</h1>
       {listOfMessages.map((message, index) => (
     <div key={index} className={message.username === username ? 'sent-message' : 'received-message'}>
     <p>{message.username}: {message.message}</p>
   </div>
   ))}
-      <div className="writing">
+      <div className="writing text-white">
           {isWriting ? <p>{dataWriting} is writing..</p> : ""}
         </div>
 
       <br></br>
       <br></br>
-      <button onClick={leaveRoom}> Leave Room </button>
-      <h1>Users in Room:</h1>
+      <button className="text-white" onClick={leaveRoom}> Leave Room </button>
+      <h1 className="text-white">Users in Room:</h1>
       <ul>
         {usersInRoom.map((user, index) => (
-          <li key={index}>{user}</li>
+          <li className="text-white" key={index}>{user}</li>
         ))}
       </ul>
       <br></br>
       <br></br>
-      <h1>Existing Rooms:</h1>
+      <h1 className="text-white">Existing Rooms:</h1>
       <ul>
         {existingRooms.map((existingRoom, index) => (
           <li key={index}>{existingRoom}</li>
