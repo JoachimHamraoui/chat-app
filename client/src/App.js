@@ -44,7 +44,7 @@ function App() {
         {!showChat && (
           <div className='w-4/12 h-screen flex items-center m-auto'>
           <div className='w-full flex flex-col'>
-            <h1 className='font-display font-semibold text-green text-4xl mb-5'>Chat App.</h1>
+            <h1 className='font-display font-bold text-green text-4xl mb-5'>Chat App.</h1>
             {/* <label htmlFor='username' className='text-white mb-2 px-4 font-mont'>Choose a Username</label> */}
             <input
               placeholder="Username..."
