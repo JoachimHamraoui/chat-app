@@ -19,3 +19,8 @@
   background-color: #FFFFFF;
   /* Other styles for received messages */
 }
+
+.chatbox {
+  margin-bottom: 18px !important;
+  /* overflow: scroll !important; */
+}
